@@ -16,8 +16,6 @@
             --border-light: #e2e8f0;
             --badge-bg: #3b82f620;
             --badge-text: #2563eb;
-            --btn-bg: #1e293b;
-            --btn-hover: #0f172a;
             --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
             --card-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.05);
             --card-hover-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15);
@@ -35,8 +33,6 @@
             --border-light: #334155;
             --badge-bg: #3b82f630;
             --badge-text: #60a5fa;
-            --btn-bg: #f1f5f9;
-            --btn-hover: #e2e8f0;
             --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
             --card-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.3);
             --card-hover-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.5);
@@ -90,7 +86,7 @@
         .avatar {
             width: 80px;
             height: 80px;
-            background: var(--accent-gradient, linear-gradient(135deg, #3b82f6, #a855f7));
+            background: linear-gradient(135deg, #3b82f6, #a855f7);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -201,9 +197,8 @@
             padding-top: 1.5rem;
         }
 
+        /* 按钮样式微调：亮色模式白字深底，暗色模式深字浅底 */
         button {
-            background: var(--btn-bg);
-            color: var(--text-primary);
             border: none;
             padding: 0.5rem 1.2rem;
             border-radius: 60px;
@@ -211,8 +206,24 @@
             cursor: pointer;
             transition: 0.2s;
         }
+        /* 亮色模式下的普通按钮 */
+        body:not(.dark) button {
+            background: #1e293b;
+            color: #ffffff;
+        }
+        body:not(.dark) button:hover {
+            background: #0f172a;
+        }
+        /* 暗色模式下的普通按钮 */
+        body.dark button {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+        body.dark button:hover {
+            background: #cbd5e6;
+        }
+        /* 所有按钮悬停时轻微缩放 */
         button:hover {
-            background: var(--btn-hover);
             transform: scale(0.97);
         }
 
