@@ -1,1 +1,326 @@
 # user-ty134.github.io
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大一学生 · 亮暗色自由切换</title>
+    <style>
+        /* ---------- 亮色模式（默认）变量 ---------- */
+        :root {
+            --bg-body: linear-gradient(145deg, #f7f9fc 0%, #eef2f5 100%);
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --card-solid: #ffffff;
+            --text-primary: #1e2a3e;
+            --text-secondary: #2c3e50;
+            --text-muted: #5b6e8c;
+            --border-light: #e2e8f0;
+            --badge-bg: #3b82f620;
+            --badge-text: #2563eb;
+            --btn-bg: #1e293b;
+            --btn-hover: #0f172a;
+            --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            --card-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.05);
+            --card-hover-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ---------- 暗色模式变量 ---------- */
+        body.dark {
+            --bg-body: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+            --bg-card: rgba(30, 41, 59, 0.85);
+            --card-solid: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-light: #334155;
+            --badge-bg: #3b82f630;
+            --badge-text: #60a5fa;
+            --btn-bg: #f1f5f9;
+            --btn-hover: #e2e8f0;
+            --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
+            --card-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.3);
+            --card-hover-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            transition: background 0.3s ease, color 0.2s ease;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 2rem 2rem 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        /* 头部区域：标题 + 主题切换按钮 */
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--text-primary), #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        .theme-toggle {
+            background: var(--card-solid);
+            border: 1px solid var(--border-light);
+            border-radius: 60px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+            box-shadow: var(--card-shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(0.96);
+            border-color: #3b82f6;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--badge-bg);
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--badge-text);
+            margin: 0.5rem 0 0.5rem;
+        }
+
+        .intro {
+            font-size: 1.2rem;
+            margin: 1rem 0 1.8rem;
+            color: var(--text-secondary);
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            transition: color 0.2s;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--card-solid);
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.2rem 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: all 0.25s ease;
+            border: 1px solid var(--border-light);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow);
+            border-color: #93c5fd;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button {
+            background: var(--btn-bg);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        button:hover {
+            background: var(--btn-hover);
+            transform: scale(0.97);
+        }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px dashed var(--border-light);
+            padding-top: 1.8rem;
+            transition: color 0.2s;
+        }
+
+        a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .header-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .theme-toggle {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-row">
+        <div>
+            <span class="badge">✨ 大一实践活动 · 第一个网页 ✨</span>
+            <h1>📄 你好，亮暗世界！</h1>
+        </div>
+        <button class="theme-toggle" id="darkModeToggle" aria-label="切换亮色/暗色模式">
+            🌙 暗色模式
+        </button>
+    </div>
+
+    <div class="intro">
+        我是大一新生，这是我的第一次前端实践作业。<br>
+        这个网页支持<strong>自由变换亮色/暗色模式</strong>，点击右上角按钮就能切换 🌞/🌙
+    </div>
+
+    <div class="card-grid">
+        <div class="card">
+            <h3>📌 实践内容</h3>
+            <p>学习 HTML / CSS / 基础交互，并实现亮暗色主题切换，把网页部署到真实的互联网上。</p>
+        </div>
+        <div class="card">
+            <h3>💡 学到的东西</h3>
+            <p>CSS 变量、主题切换逻辑、localStorage 存储用户偏好、响应式布局。</p>
+        </div>
+        <div class="card">
+            <h3>🚀 下一步计划</h3>
+            <p>继续学 JavaScript，给网页增加更多动态效果，再做一个个人作品集。</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 1rem 0 0.5rem;">
+        <button id="helloBtn">点我 say hi 👋</button>
+    </div>
+
+    <div class="footer-note">
+        🧩 本页面支持<strong>亮色/暗色自由切换</strong>，并且会记住你的选择（下次打开依然是你的偏好）。<br>
+        你可以通过 GitHub Pages 或 Vercel 把它变成 <strong>https://xxx.xxx</strong> 的真实网址。
+    </div>
+</div>
+
+<script>
+    (function() {
+        // 获取按钮和body元素
+        const toggleBtn = document.getElementById('darkModeToggle');
+        
+        // 检查本地存储中保存的主题
+        const getSavedTheme = () => localStorage.getItem('theme');
+        const saveTheme = (theme) => localStorage.setItem('theme', theme);
+        
+        // 应用主题：参数 'dark' 或 'light'
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                document.body.classList.add('dark');
+                toggleBtn.innerHTML = '☀️ 亮色模式';
+            } else {
+                document.body.classList.remove('dark');
+                toggleBtn.innerHTML = '🌙 暗色模式';
+            }
+        };
+        
+        // 初始化主题：优先使用保存的主题，否则检测系统偏好
+        const initTheme = () => {
+            const saved = getSavedTheme();
+            if (saved === 'dark' || saved === 'light') {
+                applyTheme(saved);
+                return;
+            }
+            // 检测系统是否偏好暗色模式
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (prefersDark) {
+                applyTheme('dark');
+                saveTheme('dark');
+            } else {
+                applyTheme('light');
+                saveTheme('light');
+            }
+        };
+        
+        // 切换主题
+        const toggleTheme = () => {
+            const isDark = document.body.classList.contains('dark');
+            if (isDark) {
+                applyTheme('light');
+                saveTheme('light');
+            } else {
+                applyTheme('dark');
+                saveTheme('dark');
+            }
+        };
+        
+        // 绑定按钮事件
+        toggleBtn.addEventListener('click', toggleTheme);
+        
+        // 初始化
+        initTheme();
+        
+        // 监听系统主题变化（可选，如果用户没有手动保存过则跟随系统）
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            // 仅当 localStorage 中没有手动设置时才自动跟随系统
+            if (!localStorage.getItem('theme')) {
+                const newTheme = e.matches ? 'dark' : 'light';
+                applyTheme(newTheme);
+            }
+        });
+        
+        // hello 按钮交互
+        const helloBtn = document.getElementById('helloBtn');
+        helloBtn.addEventListener('click', () => {
+            alert('🎉 太棒了！你成功运行了支持亮暗色切换的网页！');
+        });
+    })();
+</script>
+</body>
+</html>
