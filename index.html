@@ -197,34 +197,68 @@
             padding-top: 1.5rem;
         }
 
-        /* 按钮样式微调：亮色模式白字深底，暗色模式深字浅底 */
-        button {
+        /* 普通按钮样式：亮色白字深底，暗色深字浅底 */
+        button, .btn {
             border: none;
             padding: 0.5rem 1.2rem;
             border-radius: 60px;
             font-weight: 500;
             cursor: pointer;
             transition: 0.2s;
+            font-family: inherit;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
         /* 亮色模式下的普通按钮 */
-        body:not(.dark) button {
+        body:not(.dark) button:not(.resume-btn),
+        body:not(.dark) .btn:not(.resume-btn) {
             background: #1e293b;
             color: #ffffff;
         }
-        body:not(.dark) button:hover {
+        body:not(.dark) button:not(.resume-btn):hover,
+        body:not(.dark) .btn:not(.resume-btn):hover {
             background: #0f172a;
         }
         /* 暗色模式下的普通按钮 */
-        body.dark button {
+        body.dark button:not(.resume-btn),
+        body.dark .btn:not(.resume-btn) {
             background: #e2e8f0;
             color: #0f172a;
         }
-        body.dark button:hover {
+        body.dark button:not(.resume-btn):hover,
+        body.dark .btn:not(.resume-btn):hover {
             background: #cbd5e6;
         }
-        /* 所有按钮悬停时轻微缩放 */
-        button:hover {
+        /* 所有普通按钮悬停缩放 */
+        button:hover, .btn:hover {
             transform: scale(0.97);
+        }
+
+        /* 下载简历专用按钮（醒目渐变，永久可见） */
+        .resume-btn {
+            background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
+            color: white !important;
+            border: none !important;
+            text-shadow: 0 0 1px rgba(0,0,0,0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        body.dark .resume-btn {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa) !important;
+            color: #0f172a !important;
+        }
+        .resume-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
         }
 
         @media (max-width: 640px) {
@@ -299,8 +333,10 @@
         </div>
     </div>
 
-    <div style="text-align: center; margin: 1rem 0;">
-        <button id="contactBtn">📧 联系占位 (后续添加表单)</button>
+    <!-- 按钮区域：联系占位 + 下载简历（暂时占位） -->
+    <div style="text-align: center; margin: 1rem 0; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <button id="contactBtn">📧 联系占位</button>
+        <button id="resumePlaceholderBtn" class="resume-btn">📄 下载电子简历（即将开放）</button>
     </div>
 
     <div class="footer-note">
@@ -349,6 +385,14 @@
         document.getElementById('contactBtn').addEventListener('click', () => {
             alert('📮 未来会加入真实联系表单，目前可通过GitHub Issues联系我。');
         });
+        
+        // 下载简历占位按钮（暂时不工作，仅提示）
+        const resumeBtn = document.getElementById('resumePlaceholderBtn');
+        if (resumeBtn) {
+            resumeBtn.addEventListener('click', () => {
+                alert('📄 电子简历正在精心制作中，稍后开放下载。\n届时您将可以一键保存正式版PDF简历。');
+            });
+        }
     })();
 </script>
 </body>
