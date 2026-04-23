@@ -69,7 +69,6 @@
             transition: background 0.3s, box-shadow 0.3s;
         }
 
-        /* 头部区域：标题 + 主题切换按钮 */
         .header-row {
             display: flex;
             justify-content: space-between;
@@ -251,14 +250,10 @@
 
 <script>
     (function() {
-        // 获取按钮和body元素
         const toggleBtn = document.getElementById('darkModeToggle');
-        
-        // 检查本地存储中保存的主题
         const getSavedTheme = () => localStorage.getItem('theme');
         const saveTheme = (theme) => localStorage.setItem('theme', theme);
         
-        // 应用主题：参数 'dark' 或 'light'
         const applyTheme = (theme) => {
             if (theme === 'dark') {
                 document.body.classList.add('dark');
@@ -269,14 +264,12 @@
             }
         };
         
-        // 初始化主题：优先使用保存的主题，否则检测系统偏好
         const initTheme = () => {
             const saved = getSavedTheme();
             if (saved === 'dark' || saved === 'light') {
                 applyTheme(saved);
                 return;
             }
-            // 检测系统是否偏好暗色模式
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             if (prefersDark) {
                 applyTheme('dark');
@@ -287,7 +280,6 @@
             }
         };
         
-        // 切换主题
         const toggleTheme = () => {
             const isDark = document.body.classList.contains('dark');
             if (isDark) {
@@ -299,22 +291,16 @@
             }
         };
         
-        // 绑定按钮事件
         toggleBtn.addEventListener('click', toggleTheme);
-        
-        // 初始化
         initTheme();
         
-        // 监听系统主题变化（可选，如果用户没有手动保存过则跟随系统）
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            // 仅当 localStorage 中没有手动设置时才自动跟随系统
             if (!localStorage.getItem('theme')) {
                 const newTheme = e.matches ? 'dark' : 'light';
                 applyTheme(newTheme);
             }
         });
         
-        // hello 按钮交互
         const helloBtn = document.getElementById('helloBtn');
         helloBtn.addEventListener('click', () => {
             alert('🎉 太棒了！你成功运行了支持亮暗色切换的网页！');
