@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>岳怀旭 · 电子简历（建设中）</title>
+    <title>岳怀旭 · 个人电子简历</title>
+    <!-- 引入 Lucide 图标库 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* ---------- 亮色模式变量 ---------- */
         :root {
@@ -20,6 +22,7 @@
             --card-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.05);
             --card-hover-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15);
             --avatar-border: #e2e8f0;
+            --accent-color: #3b82f6;
         }
 
         /* ---------- 暗色模式变量 ---------- */
@@ -37,6 +40,7 @@
             --card-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.3);
             --card-hover-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.5);
             --avatar-border: #475569;
+            --accent-color: #60a5fa;
         }
 
         * {
@@ -49,31 +53,35 @@
             font-family: system-ui, 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-body);
             color: var(--text-primary);
-            line-height: 1.5;
+            line-height: 1.6;
             padding: 2rem 1.5rem;
             min-height: 100vh;
             transition: background 0.3s ease, color 0.2s ease;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 900px; 
             margin: 0 auto;
             background: var(--bg-card);
             backdrop-filter: blur(12px);
-            border-radius: 2rem;
-            padding: 2rem 2rem 2.5rem;
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            padding: 2.5rem 3rem;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-light);
             transition: background 0.3s, box-shadow 0.3s;
         }
 
-        .header-row {
+        /* 顶部 Header 布局 */
+        .profile-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .avatar-area {
@@ -84,42 +92,70 @@
         }
 
         .avatar {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #3b82f6, #a855f7);
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, var(--accent-color), #a855f7);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            font-weight: 600;
             color: white;
             box-shadow: 0 8px 16px -6px rgba(0,0,0,0.2);
-            border: 2px solid var(--avatar-border);
+            border: 3px solid var(--avatar-border);
+            overflow: hidden; 
         }
 
         .name-title h1 {
             font-size: 2.2rem;
-            background: linear-gradient(135deg, var(--text-primary), #3b82f6);
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.3rem;
         }
 
         .name-title .tagline {
             font-size: 1rem;
             color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* 社交与操作按钮区 */
+        .action-area {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            transition: color 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
         }
 
         .theme-toggle {
             background: var(--card-solid);
             border: 1px solid var(--border-light);
             border-radius: 60px;
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             cursor: pointer;
-            font-size: 1rem;
-            display: flex;
+            font-size: 0.9rem;
+            display: inline-flex;
             align-items: center;
             gap: 6px;
             color: var(--text-primary);
@@ -127,81 +163,163 @@
             box-shadow: var(--card-shadow);
         }
 
-        .badge {
-            display: inline-block;
-            background: var(--badge-bg);
-            padding: 0.25rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--badge-text);
-            margin: 0.5rem 0;
+        .theme-toggle:hover {
+            transform: scale(0.97);
         }
 
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: var(--badge-bg);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--badge-text);
+            margin-bottom: 1.5rem;
+        }
+
+        /* 区块样式 */
         .section {
-            margin: 2rem 0;
+            margin: 2.5rem 0;
         }
 
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            border-left: 4px solid #3b82f6;
-            padding-left: 1rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.8rem;
+            line-height: 1;
         }
 
-        .skills {
+        /* 技能分类布局 */
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .skill-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .skill-label {
+            width: 80px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+            flex-shrink: 0;
+        }
+
+        .skills-list {
             display: flex;
             flex-wrap: wrap;
             gap: 0.6rem;
-            margin: 1rem 0;
+            flex: 1;
         }
+
         .skill-tag {
             background: var(--card-solid);
             border: 1px solid var(--border-light);
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            transition: 0.1s;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            color: var(--text-secondary);
         }
 
-        .exp-item, .project-item {
+        .skill-tag:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* 经历与项目卡片 */
+        .card-item {
             background: var(--card-solid);
-            border-radius: 1rem;
-            padding: 1rem;
+            border-radius: 0.8rem;
+            padding: 1.2rem 1.5rem;
             margin-bottom: 1rem;
             border: 1px solid var(--border-light);
             transition: 0.2s;
-        }
-        .exp-item:hover, .project-item:hover {
-            transform: translateX(6px);
-            border-color: #3b82f6;
+            position: relative;
         }
 
-        .exp-title, .project-title {
+        .card-item:hover {
+            transform: translateX(4px);
+            border-color: var(--accent-color);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .card-title {
             font-weight: 700;
             font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .exp-date {
-            font-size: 0.8rem;
+
+        .card-meta {
+            font-size: 0.85rem;
             color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+        }
+
+        .card-desc li {
+            margin-left: 1.2rem;
             margin-bottom: 0.3rem;
         }
 
-        .footer-note {
-            margin-top: 2.5rem;
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            border-top: 1px dashed var(--border-light);
-            padding-top: 1.5rem;
+        /* 卡片内部的链接/按钮 */
+        .card-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.8rem;
         }
 
-        /* 普通按钮样式：亮色白字深底，暗色深字浅底 */
-        button, .btn {
+        .card-links a {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 500;
+        }
+        
+        .card-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* 按钮与页脚 */
+        .btn {
             border: none;
             padding: 0.5rem 1.2rem;
-            border-radius: 60px;
+            border-radius: 8px;
             font-weight: 500;
             cursor: pointer;
             transition: 0.2s;
@@ -210,187 +328,257 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-        }
-        /* 亮色模式下的普通按钮 */
-        body:not(.dark) button:not(.resume-btn),
-        body:not(.dark) .btn:not(.resume-btn) {
-            background: #1e293b;
-            color: #ffffff;
-        }
-        body:not(.dark) button:not(.resume-btn):hover,
-        body:not(.dark) .btn:not(.resume-btn):hover {
-            background: #0f172a;
-        }
-        /* 暗色模式下的普通按钮 */
-        body.dark button:not(.resume-btn),
-        body.dark .btn:not(.resume-btn) {
-            background: #e2e8f0;
-            color: #0f172a;
-        }
-        body.dark button:not(.resume-btn):hover,
-        body.dark .btn:not(.resume-btn):hover {
-            background: #cbd5e6;
-        }
-        /* 所有普通按钮悬停缩放 */
-        button:hover, .btn:hover {
-            transform: scale(0.97);
+            gap: 0.4rem;
         }
 
-        /* 下载简历专用按钮（醒目渐变，永久可见） */
         .resume-btn {
-            background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
-            color: white !important;
-            border: none !important;
-            text-shadow: 0 0 1px rgba(0,0,0,0.2);
-            padding: 0.5rem 1.2rem;
-            border-radius: 60px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        body.dark .resume-btn {
-            background: linear-gradient(135deg, #60a5fa, #a78bfa) !important;
-            color: #0f172a !important;
-        }
-        .resume-btn:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.05);
+            background: var(--accent-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
         }
 
+        .resume-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        body.dark .resume-btn:hover {
+            background: #93c5fd;
+        }
+
+        .footer-note {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px dashed var(--border-light);
+            padding-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ---------- 为打印模式做准备 (Ctrl+P) ---------- */
+        @media print {
+            body { 
+                background: white !important; 
+                color: black !important; 
+                padding: 0;
+            }
+            .container { 
+                box-shadow: none !important; 
+                border: none !important; 
+                padding: 0;
+                max-width: 100%;
+            }
+            .theme-toggle, .resume-btn, .footer-note, .social-links { 
+                display: none !important; 
+            }
+            .badge {
+                border: 1px solid #ccc;
+                color: #666;
+            }
+            /* 强制覆盖所有暗色模式的颜色 */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* 移动端适配 */
         @media (max-width: 640px) {
-            .container { padding: 1.2rem; }
-            .avatar { width: 60px; height: 60px; font-size: 2rem; }
-            .name-title h1 { font-size: 1.6rem; }
+            .container { padding: 1.5rem; border-radius: 1rem; }
+            .profile-header { flex-direction: column; align-items: flex-start; }
+            .action-area { align-items: flex-start; width: 100%; flex-direction: row-reverse; justify-content: space-between;}
+            .avatar { width: 70px; height: 70px; }
+            .name-title h1 { font-size: 1.8rem; }
+            .skill-group { flex-direction: column; gap: 0.3rem; }
+            .card-header { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header-row">
+
+<main class="container">
+    <!-- 头部区域 -->
+    <header class="profile-header">
         <div class="avatar-area">
-            <div class="avatar">🌙</div>
+            <div class="avatar">
+                <!-- 预留放照片的位置，目前使用图标占位 -->
+                <i data-lucide="user" style="width: 40px; height: 40px;"></i>
+            </div>
             <div class="name-title">
                 <h1>岳怀旭</h1>
-                <div class="tagline">✨ 大一 · 前端学习者 · 未来全栈开发</div>
+                <div class="tagline">
+                    <i data-lucide="code" style="width: 16px; height: 16px;"></i> 常州大学 · 软件工程 · 前端学习者
+                </div>
             </div>
         </div>
-        <button class="theme-toggle" id="darkModeToggle" aria-label="切换亮暗色">
-            🌙 暗色模式
-        </button>
-    </div>
+        
+        <div class="action-area">
+            <button class="theme-toggle" id="darkModeToggle" aria-label="切换亮暗色">
+                <i data-lucide="moon" style="width: 16px; height: 16px;"></i> <span>暗色模式</span>
+            </button>
+            <div class="social-links">
+                <!-- 已更新为你的真实 GitHub 链接 -->
+                <a href="https://github.com/user-ty134" target="_blank" title="GitHub 主页" aria-label="GitHub">
+                    <i data-lucide="github"></i>
+                </a>
+                <a href="mailto:请替换为你的邮箱@example.com" title="发送邮件" aria-label="Email">
+                    <i data-lucide="mail"></i>
+                </a>
+            </div>
+        </div>
+    </header>
 
-    <div class="badge">📌 电子简历 · 持续迭代中（当前版本 v0.1）</div>
-
-    <!-- 按钮区域：已经移动到“关于我”上面，badge下面 -->
-    <div style="text-align: center; margin: 1rem 0; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <button id="contactBtn">📧 联系占位</button>
-        <button id="resumePlaceholderBtn" class="resume-btn">📄 下载电子简历（即将开放）</button>
+    <div class="badge">
+        <i data-lucide="pin" style="width: 14px; height: 14px;"></i> 电子简历 · 持续迭代中 (当前版本 v0.2)
     </div>
 
     <!-- 简介（关于我） -->
-    <div class="section">
-        <div class="section-title">📖 关于我</div>
+    <section class="section">
+        <h2 class="section-title"><i data-lucide="user-circle"></i> 关于我</h2>
         <p style="color: var(--text-secondary);">
-            一名热爱创造的大一学生，从设计到代码，享受把想法变成网页的过程。<br>
-            正在系统学习前端三件套，并计划深入 React / Vue，目标是成为优秀的全栈工程师。<br>
-            这个网站将一步步记录我的成长，最终成为一个完整的电子简历。
+            一名常州大学软件工程专业的大一学生，热爱创造与技术，享受把想法变成真实网页的过程。<br>
+            目前正在系统学习前端核心技术（HTML/CSS/JS），并计划深入 React / Vue 框架。具有良好的自学能力与代码规范意识，目标是在毕业前成为具备独立开发能力的优秀全栈工程师。
         </p>
-    </div>
+    </section>
 
-    <!-- 技能 -->
-    <div class="section">
-        <div class="section-title">🛠 技术栈</div>
-        <div class="skills">
-            <span class="skill-tag">HTML5</span>
-            <span class="skill-tag">CSS3</span>
-            <span class="skill-tag">JavaScript (基础)</span>
-            <span class="skill-tag">Git & GitHub</span>
-            <span class="skill-tag">响应式设计</span>
-        </div>
-    </div>
+    <!-- 教育背景 (求职必须模块) -->
+    <section class="section">
+        <h2 class="section-title"><i data-lucide="graduation-cap"></i> 教育背景</h2>
+        <article class="card-item">
+            <div class="card-header">
+                <div class="card-title">常州大学</div>
+                <!-- 假设大一新生是2024级，你可以根据真实入学年份修改这里 -->
+                <div class="card-meta">2024.09 - 2028.06 (预计)</div>
+            </div>
+            <div class="card-desc">
+                <strong>专业：</strong>软件工程<br>
+                <strong>相关课程：</strong>高等数学、C语言程序设计、网页设计基础 (后续可加上数据结构、计算机网络等)
+            </div>
+        </article>
+    </section>
 
-    <!-- 经历占位 -->
-    <div class="section">
-        <div class="section-title">📂 项目与实践</div>
-        <div class="project-item">
-            <div class="project-title">🌓 亮暗色切换个人站</div>
-            <div>首个完整前端作品 - 支持主题切换、本地存储、响应式布局。代码已开源并部署在 GitHub Pages。</div>
+    <!-- 技能栈 (分类展示更加专业) -->
+    <section class="section">
+        <h2 class="section-title"><i data-lucide="layers"></i> 技术栈</h2>
+        <div class="skills-container">
+            <div class="skill-group">
+                <div class="skill-label">前端基础</div>
+                <div class="skills-list">
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">JavaScript (ES6+)</span>
+                    <span class="skill-tag">响应式设计</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-label">框架与工具</div>
+                <div class="skills-list">
+                    <span class="skill-tag">Git & GitHub</span>
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">Figma (UI设计基础)</span>
+                </div>
+            </div>
         </div>
-        <div class="project-item">
-            <div class="project-title">📄 电子简历（当前页面）</div>
-            <div>正在逐步完善的简历网站，后续将加入作品集、联系表单、动态数据。</div>
-        </div>
-    </div>
+    </section>
 
-    <!-- 教育 / 目标 -->
-    <div class="section">
-        <div class="section-title">🎯 当前目标</div>
-        <div class="exp-item">
-            <div class="exp-title">扎实前端基础</div>
-            <div>完成 JavaScript 进阶学习，会使用 Vue 或 React 开发简单应用。</div>
-        </div>
-        <div class="exp-item">
-            <div class="exp-title">积累开源作品</div>
-            <div>每月至少产出一个小型网页项目，并记录学习笔记到博客。</div>
-        </div>
-    </div>
+    <!-- 实践项目 -->
+    <section class="section">
+        <h2 class="section-title"><i data-lucide="folder-git-2"></i> 项目实践</h2>
+        
+        <article class="card-item">
+            <div class="card-header">
+                <div class="card-title">个人电子简历与展示主页</div>
+                <div class="card-meta">2024 至今</div>
+            </div>
+            <div class="card-desc">
+                <ul>
+                    <li>使用原生 HTML5/CSS3/JS 独立开发，并基于 <strong>GitHub Pages</strong> 自动化部署上线。</li>
+                    <li>采用 Glassmorphism (玻璃拟态) 风格，结合 CSS 变量与 Flexbox 实现了跨设备响应式布局。</li>
+                    <li>利用 LocalStorage 与 <code>matchMedia</code> API 实现了状态持久化的深浅色模式无缝切换。</li>
+                </ul>
+            </div>
+            <div class="card-links">
+                <!-- 已更新为你的真实预览链接与源码链接 -->
+                <a href="https://user-ty134.github.io" target="_blank"><i data-lucide="external-link" style="width: 14px;"></i> 在线预览</a>
+                <a href="https://github.com/user-ty134/user-ty134.github.io" target="_blank"><i data-lucide="github" style="width: 14px;"></i> 源码链接</a>
+            </div>
+        </article>
+    </section>
 
-    <div class="footer-note">
-        🧩 本简历网站支持亮/暗色自由切换，并会记住你的偏好。<br>
-        持续迭代中，欢迎回访 👋
-    </div>
-</div>
+    <!-- 发展目标 -->
+    <section class="section">
+        <h2 class="section-title"><i data-lucide="target"></i> 近期目标</h2>
+        <article class="card-item">
+            <div class="card-title">扎实软件工程基础与框架入门</div>
+            <div class="card-desc" style="margin-top: 0.5rem; margin-bottom: 0;">
+                结合专业课程打好编程基础，同时系统完成 JavaScript 核心机制学习，并开始使用 Vue3 或 React 开发动态交互应用。
+            </div>
+        </article>
+    </section>
+
+    <!-- 底部与下载按钮 -->
+    <footer class="footer-note">
+        <button id="resumePlaceholderBtn" class="btn resume-btn">
+            <i data-lucide="download"></i> 下载 PDF 简历
+        </button>
+        <div style="margin-top: 1rem;">
+            <i data-lucide="lightbulb" style="width: 16px; height: 16px;"></i> 本网站支持系统级亮/暗色自适应，并缓存偏好设置。<br>
+            © 2024 岳怀旭. 持续迭代中 👋
+        </div>
+    </footer>
+</main>
 
 <script>
+    // 1. 初始化 Lucide 图标
+    lucide.createIcons();
+
+    // 2. 主题切换逻辑
     (function() {
         const toggleBtn = document.getElementById('darkModeToggle');
-        const getSavedTheme = () => localStorage.getItem('theme');
-        const saveTheme = (theme) => localStorage.setItem('theme', theme);
+        const iconSpan = toggleBtn.querySelector('span');
         
         const applyTheme = (theme) => {
             if (theme === 'dark') {
                 document.body.classList.add('dark');
-                toggleBtn.innerHTML = '☀️ 亮色模式';
+                iconSpan.innerText = '亮色模式';
+                toggleBtn.innerHTML = `<i data-lucide="sun" style="width: 16px; height: 16px;"></i> <span>亮色模式</span>`;
             } else {
                 document.body.classList.remove('dark');
-                toggleBtn.innerHTML = '🌙 暗色模式';
+                iconSpan.innerText = '暗色模式';
+                toggleBtn.innerHTML = `<i data-lucide="moon" style="width: 16px; height: 16px;"></i> <span>暗色模式</span>`;
             }
+            lucide.createIcons(); // 重新渲染替换后的图标
         };
         
         const initTheme = () => {
-            const saved = getSavedTheme();
+            const saved = localStorage.getItem('theme');
             if (saved === 'dark' || saved === 'light') {
                 applyTheme(saved);
                 return;
             }
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (prefersDark) applyTheme('dark');
-            else applyTheme('light');
+            applyTheme(prefersDark ? 'dark' : 'light');
         };
         
         const toggleTheme = () => {
             const isDark = document.body.classList.contains('dark');
-            isDark ? applyTheme('light') : applyTheme('dark');
-            saveTheme(isDark ? 'light' : 'dark');
+            const newTheme = isDark ? 'light' : 'dark';
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
         };
         
         toggleBtn.addEventListener('click', toggleTheme);
         initTheme();
         
-        // 联系按钮临时提示
-        document.getElementById('contactBtn').addEventListener('click', () => {
-            alert('📮 未来会加入真实联系表单，目前可通过GitHub Issues联系我。');
-        });
-        
-        // 下载简历占位按钮（暂时不工作，仅提示）
+        // 3. 按钮互动提示
         const resumeBtn = document.getElementById('resumePlaceholderBtn');
         if (resumeBtn) {
             resumeBtn.addEventListener('click', () => {
-                alert('📄 电子简历正在精心制作中，稍后开放下载。\n届时您将可以一键保存正式版PDF简历。');
+                alert('📄 提示：您可以直接按下 Ctrl+P (或 Cmd+P) 将本网页完美打印/保存为黑白排版的 PDF 简历。');
             });
         }
     })();
