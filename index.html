@@ -180,6 +180,38 @@
             margin-bottom: 1.5rem;
         }
 
+        /* 按钮样式（与之前版本一致） */
+        .btn {
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .resume-btn {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+        }
+
+        body.dark .resume-btn {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            color: #0f172a;
+        }
+
+        .resume-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+
         /* 区块样式 */
         .section {
             margin: 2.5rem 0;
@@ -315,37 +347,6 @@
             text-decoration: underline;
         }
 
-        /* 按钮与页脚 */
-        .btn {
-            border: none;
-            padding: 0.5rem 1.2rem;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.2s;
-            font-family: inherit;
-            font-size: 0.9rem;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .resume-btn {
-            background: var(--accent-color);
-            color: white;
-            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
-        }
-
-        .resume-btn:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-        }
-
-        body.dark .resume-btn:hover {
-            background: #93c5fd;
-        }
-
         .footer-note {
             margin-top: 3rem;
             text-align: center;
@@ -359,7 +360,7 @@
             gap: 0.5rem;
         }
 
-        /* ---------- 为打印模式做准备 (Ctrl+P) ---------- */
+        /* 为打印模式做准备 (Ctrl+P) */
         @media print {
             body { 
                 background: white !important; 
@@ -379,7 +380,6 @@
                 border: 1px solid #ccc;
                 color: #666;
             }
-            /* 强制覆盖所有暗色模式的颜色 */
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -405,7 +405,6 @@
     <header class="profile-header">
         <div class="avatar-area">
             <div class="avatar">
-                <!-- 预留放照片的位置，目前使用图标占位 -->
                 <i data-lucide="user" style="width: 40px; height: 40px;"></i>
             </div>
             <div class="name-title">
@@ -421,7 +420,6 @@
                 <i data-lucide="moon" style="width: 16px; height: 16px;"></i> <span>暗色模式</span>
             </button>
             <div class="social-links">
-                <!-- 已更新为你的真实 GitHub 链接 -->
                 <a href="https://github.com/user-ty134" target="_blank" title="GitHub 主页" aria-label="GitHub">
                     <i data-lucide="github"></i>
                 </a>
@@ -436,6 +434,13 @@
         <i data-lucide="pin" style="width: 14px; height: 14px;"></i> 电子简历 · 持续迭代中 (当前版本 v0.2)
     </div>
 
+    <!-- 新增：下载按钮放在这里（badge下面，关于我上面） -->
+    <div style="text-align: center; margin: 1rem 0 1.5rem 0;">
+        <button id="resumePlaceholderBtn" class="btn resume-btn">
+            <i data-lucide="download"></i> 下载 PDF 简历
+        </button>
+    </div>
+
     <!-- 简介（关于我） -->
     <section class="section">
         <h2 class="section-title"><i data-lucide="user-circle"></i> 关于我</h2>
@@ -445,23 +450,22 @@
         </p>
     </section>
 
-    <!-- 教育背景 (求职必须模块) -->
+    <!-- 教育背景 -->
     <section class="section">
         <h2 class="section-title"><i data-lucide="graduation-cap"></i> 教育背景</h2>
         <article class="card-item">
             <div class="card-header">
                 <div class="card-title">常州大学</div>
-                <!-- 假设大一新生是2024级，你可以根据真实入学年份修改这里 -->
                 <div class="card-meta">2024.09 - 2028.06 (预计)</div>
             </div>
             <div class="card-desc">
                 <strong>专业：</strong>软件工程<br>
-                <strong>相关课程：</strong>高等数学、C语言程序设计、网页设计基础 (后续可加上数据结构、计算机网络等)
+                <strong>相关课程：</strong>高等数学、C语言程序设计、网页设计基础
             </div>
         </article>
     </section>
 
-    <!-- 技能栈 (分类展示更加专业) -->
+    <!-- 技能栈 -->
     <section class="section">
         <h2 class="section-title"><i data-lucide="layers"></i> 技术栈</h2>
         <div class="skills-container">
@@ -502,7 +506,6 @@
                 </ul>
             </div>
             <div class="card-links">
-                <!-- 已更新为你的真实预览链接与源码链接 -->
                 <a href="https://user-ty134.github.io" target="_blank"><i data-lucide="external-link" style="width: 14px;"></i> 在线预览</a>
                 <a href="https://github.com/user-ty134/user-ty134.github.io" target="_blank"><i data-lucide="github" style="width: 14px;"></i> 源码链接</a>
             </div>
@@ -520,12 +523,9 @@
         </article>
     </section>
 
-    <!-- 底部与下载按钮 -->
+    <!-- 底部仅保留版权信息，按钮已移到上面 -->
     <footer class="footer-note">
-        <button id="resumePlaceholderBtn" class="btn resume-btn">
-            <i data-lucide="download"></i> 下载 PDF 简历
-        </button>
-        <div style="margin-top: 1rem;">
+        <div>
             <i data-lucide="lightbulb" style="width: 16px; height: 16px;"></i> 本网站支持系统级亮/暗色自适应，并缓存偏好设置。<br>
             © 2024 岳怀旭. 持续迭代中 👋
         </div>
@@ -551,7 +551,7 @@
                 iconSpan.innerText = '暗色模式';
                 toggleBtn.innerHTML = `<i data-lucide="moon" style="width: 16px; height: 16px;"></i> <span>暗色模式</span>`;
             }
-            lucide.createIcons(); // 重新渲染替换后的图标
+            lucide.createIcons();
         };
         
         const initTheme = () => {
@@ -574,11 +574,11 @@
         toggleBtn.addEventListener('click', toggleTheme);
         initTheme();
         
-        // 3. 按钮互动提示
+        // 3. 下载简历按钮占位提示（使用与我之前版本一致的提示文字）
         const resumeBtn = document.getElementById('resumePlaceholderBtn');
         if (resumeBtn) {
             resumeBtn.addEventListener('click', () => {
-                alert('📄 提示：您可以直接按下 Ctrl+P (或 Cmd+P) 将本网页完美打印/保存为黑白排版的 PDF 简历。');
+                alert('📄 电子简历正在精心制作中，稍后开放下载。\n届时您将可以一键保存正式版PDF简历。');
             });
         }
     })();
