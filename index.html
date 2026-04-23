@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>大一学生 · 亮暗色自由切换</title>
+    <title>岳怀旭 · 电子简历（建设中）</title>
     <style>
-        /* ---------- 亮色模式（默认）变量 ---------- */
+        /* ---------- 亮色模式变量 ---------- */
         :root {
             --bg-body: linear-gradient(145deg, #f7f9fc 0%, #eef2f5 100%);
             --bg-card: rgba(255, 255, 255, 0.85);
@@ -21,6 +21,7 @@
             --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
             --card-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.05);
             --card-hover-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15);
+            --avatar-border: #e2e8f0;
         }
 
         /* ---------- 暗色模式变量 ---------- */
@@ -39,6 +40,7 @@
             --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
             --card-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.3);
             --card-hover-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.5);
+            --avatar-border: #475569;
         }
 
         * {
@@ -58,7 +60,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             background: var(--bg-card);
             backdrop-filter: blur(12px);
@@ -75,16 +77,43 @@
             align-items: flex-start;
             flex-wrap: wrap;
             gap: 1rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
-        h1 {
+        .avatar-area {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-gradient, linear-gradient(135deg, #3b82f6, #a855f7));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 2.5rem;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 8px 16px -6px rgba(0,0,0,0.2);
+            border: 2px solid var(--avatar-border);
+        }
+
+        .name-title h1 {
+            font-size: 2.2rem;
             background: linear-gradient(135deg, var(--text-primary), #3b82f6);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             margin-bottom: 0.25rem;
+        }
+
+        .name-title .tagline {
+            font-size: 1rem;
+            color: var(--text-secondary);
         }
 
         .theme-toggle {
@@ -93,18 +122,13 @@
             border-radius: 60px;
             padding: 0.5rem 1rem;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
             gap: 6px;
             color: var(--text-primary);
             transition: all 0.2s ease;
             box-shadow: var(--card-shadow);
-        }
-
-        .theme-toggle:hover {
-            transform: scale(0.96);
-            border-color: #3b82f6;
         }
 
         .badge {
@@ -115,63 +139,57 @@
             font-size: 0.8rem;
             font-weight: 500;
             color: var(--badge-text);
-            margin: 0.5rem 0 0.5rem;
+            margin: 0.5rem 0;
         }
 
-        .intro {
-            font-size: 1.2rem;
-            margin: 1rem 0 1.8rem;
-            color: var(--text-secondary);
-            border-left: 4px solid #3b82f6;
-            padding-left: 1rem;
-            transition: color 0.2s;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
+        .section {
             margin: 2rem 0;
         }
 
-        .card {
-            background: var(--card-solid);
-            border-radius: 1.5rem;
-            padding: 1.2rem 1.2rem 1.5rem;
-            box-shadow: var(--card-shadow);
-            transition: all 0.25s ease;
-            border: 1px solid var(--border-light);
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--card-hover-shadow);
-            border-color: #93c5fd;
-        }
-
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
+        .skills {
             display: flex;
-            align-items: center;
-            gap: 8px;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0;
         }
-
-        button {
-            background: var(--btn-bg);
-            color: var(--text-primary);
-            border: none;
-            padding: 0.6rem 1.4rem;
-            border-radius: 60px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.2s;
+        .skill-tag {
+            background: var(--card-solid);
+            border: 1px solid var(--border-light);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
             font-size: 0.9rem;
+            transition: 0.1s;
         }
 
-        button:hover {
-            background: var(--btn-hover);
-            transform: scale(0.97);
+        .exp-item, .project-item {
+            background: var(--card-solid);
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-light);
+            transition: 0.2s;
+        }
+        .exp-item:hover, .project-item:hover {
+            transform: translateX(6px);
+            border-color: #3b82f6;
+        }
+
+        .exp-title, .project-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .exp-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
         }
 
         .footer-note {
@@ -180,71 +198,103 @@
             font-size: 0.85rem;
             color: var(--text-muted);
             border-top: 1px dashed var(--border-light);
-            padding-top: 1.8rem;
-            transition: color 0.2s;
+            padding-top: 1.5rem;
         }
 
-        a {
-            color: #60a5fa;
-            text-decoration: none;
+        button {
+            background: var(--btn-bg);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover {
+            background: var(--btn-hover);
+            transform: scale(0.97);
         }
 
         @media (max-width: 640px) {
-            .container {
-                padding: 1.5rem;
-            }
-            h1 {
-                font-size: 1.8rem;
-            }
-            .header-row {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .theme-toggle {
-                align-self: flex-end;
-            }
+            .container { padding: 1.2rem; }
+            .avatar { width: 60px; height: 60px; font-size: 2rem; }
+            .name-title h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header-row">
-        <div>
-            <span class="badge">✨ 大一实践活动 · 第一个网页 ✨</span>
-            <h1>📄 你好，亮暗世界！</h1>
+        <div class="avatar-area">
+            <div class="avatar">🌙</div>
+            <div class="name-title">
+                <h1>岳怀旭</h1>
+                <div class="tagline">✨ 大一 · 前端学习者 · 未来全栈开发</div>
+            </div>
         </div>
-        <button class="theme-toggle" id="darkModeToggle" aria-label="切换亮色/暗色模式">
+        <button class="theme-toggle" id="darkModeToggle" aria-label="切换亮暗色">
             🌙 暗色模式
         </button>
     </div>
 
-    <div class="intro">
-        我是大一新生，这是我的第一次前端实践作业。<br>
-        这个网页支持<strong>自由变换亮色/暗色模式</strong>，点击右上角按钮就能切换 🌞/🌙
+    <div class="badge">📌 电子简历 · 持续迭代中（当前版本 v0.1）</div>
+
+    <!-- 简介 -->
+    <div class="section">
+        <div class="section-title">📖 关于我</div>
+        <p style="color: var(--text-secondary);">
+            一名热爱创造的大一学生，从设计到代码，享受把想法变成网页的过程。<br>
+            正在系统学习前端三件套，并计划深入 React / Vue，目标是成为优秀的全栈工程师。<br>
+            这个网站将一步步记录我的成长，最终成为一个完整的电子简历。
+        </p>
     </div>
 
-    <div class="card-grid">
-        <div class="card">
-            <h3>📌 实践内容</h3>
-            <p>学习 HTML / CSS / 基础交互，并实现亮暗色主题切换，把网页部署到真实的互联网上。</p>
-        </div>
-        <div class="card">
-            <h3>💡 学到的东西</h3>
-            <p>CSS 变量、主题切换逻辑、localStorage 存储用户偏好、响应式布局。</p>
-        </div>
-        <div class="card">
-            <h3>🚀 下一步计划</h3>
-            <p>继续学 JavaScript，给网页增加更多动态效果，再做一个个人作品集。</p>
+    <!-- 技能 -->
+    <div class="section">
+        <div class="section-title">🛠 技术栈</div>
+        <div class="skills">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">JavaScript (基础)</span>
+            <span class="skill-tag">Git & GitHub</span>
+            <span class="skill-tag">响应式设计</span>
         </div>
     </div>
 
-    <div style="text-align: center; margin: 1rem 0 0.5rem;">
-        <button id="helloBtn">点我 say hi 👋</button>
+    <!-- 经历占位 -->
+    <div class="section">
+        <div class="section-title">📂 项目与实践</div>
+        <div class="project-item">
+            <div class="project-title">🌓 亮暗色切换个人站</div>
+            <div>首个完整前端作品 - 支持主题切换、本地存储、响应式布局。代码已开源并部署在 GitHub Pages。</div>
+        </div>
+        <div class="project-item">
+            <div class="project-title">📄 电子简历（当前页面）</div>
+            <div>正在逐步完善的简历网站，后续将加入作品集、联系表单、动态数据。</div>
+        </div>
+    </div>
+
+    <!-- 教育 / 目标 -->
+    <div class="section">
+        <div class="section-title">🎯 当前目标</div>
+        <div class="exp-item">
+            <div class="exp-title">扎实前端基础</div>
+            <div>完成 JavaScript 进阶学习，会使用 Vue 或 React 开发简单应用。</div>
+        </div>
+        <div class="exp-item">
+            <div class="exp-title">积累开源作品</div>
+            <div>每月至少产出一个小型网页项目，并记录学习笔记到博客。</div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 1rem 0;">
+        <button id="contactBtn">📧 联系占位 (后续添加表单)</button>
     </div>
 
     <div class="footer-note">
-        🧩 本页面支持<strong>亮色/暗色自由切换</strong>，并且会记住你的选择（下次打开依然是你的偏好）。<br>
-        你可以通过 GitHub Pages 或 Vercel 把它变成 <strong>https://xxx.xxx</strong> 的真实网址。
+        🧩 本简历网站支持亮/暗色自由切换，并会记住你的偏好。<br>
+        持续迭代中，欢迎回访 👋
     </div>
 </div>
 
@@ -271,39 +321,22 @@
                 return;
             }
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (prefersDark) {
-                applyTheme('dark');
-                saveTheme('dark');
-            } else {
-                applyTheme('light');
-                saveTheme('light');
-            }
+            if (prefersDark) applyTheme('dark');
+            else applyTheme('light');
         };
         
         const toggleTheme = () => {
             const isDark = document.body.classList.contains('dark');
-            if (isDark) {
-                applyTheme('light');
-                saveTheme('light');
-            } else {
-                applyTheme('dark');
-                saveTheme('dark');
-            }
+            isDark ? applyTheme('light') : applyTheme('dark');
+            saveTheme(isDark ? 'light' : 'dark');
         };
         
         toggleBtn.addEventListener('click', toggleTheme);
         initTheme();
         
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!localStorage.getItem('theme')) {
-                const newTheme = e.matches ? 'dark' : 'light';
-                applyTheme(newTheme);
-            }
-        });
-        
-        const helloBtn = document.getElementById('helloBtn');
-        helloBtn.addEventListener('click', () => {
-            alert('🎉 太棒了！你成功运行了支持亮暗色切换的网页！');
+        // 联系按钮临时提示
+        document.getElementById('contactBtn').addEventListener('click', () => {
+            alert('📮 未来会加入真实联系表单，目前可通过GitHub Issues联系我。');
         });
     })();
 </script>
