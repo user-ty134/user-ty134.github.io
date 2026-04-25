@@ -133,16 +133,16 @@
             gap: 1.4rem;
         }
 
-        /* ===== 一寸证件照样式（取代原来的头像图标） ===== */
+        /* ===== 一寸证件照（已放大） ===== */
         .avatar {
-            width: 80px;              /* 一寸照片显示宽度，按比例 */
-            height: 112px;            /* 一寸照片高度，5:7 比例 */
-            border-radius: 6px;       /* 轻微圆角 */
-            object-fit: cover;        /* 保持原图比例裁剪填充 */
+            width: 110px;             /* 一寸照片放大宽度，5:7 比例 */
+            height: 154px;
+            border-radius: 6px;
+            object-fit: cover;
             flex-shrink: 0;
             border: 2px solid var(--border);
             box-shadow: 0 4px 18px var(--accent-glow);
-            background: #f5f5f5;      /* 图片未加载时的占位底色 */
+            background: #f5f5f5;
         }
 
         .name-block h1 {
@@ -275,19 +275,16 @@
         }
         .tag:hover { transform: translateY(-2px); }
 
-        /* Mastered */
         .tag-on {
             background: var(--accent-dim);
             border-color: color-mix(in srgb, var(--accent) 35%, transparent);
             color: var(--accent);
         }
-        /* Learning */
         .tag-mid {
             background: transparent;
             border-color: var(--border);
             color: var(--text-2);
         }
-        /* Planned */
         .tag-off {
             background: transparent;
             border-style: dashed;
@@ -471,6 +468,12 @@
             .skill-row    { flex-direction: column; gap: 0.3rem; }
             .edu-row      { flex-direction: column; }
             .rm-label     { font-size: 0.85rem; }
+
+            /* 移动端适当缩小证件照，保持比例 */
+            .avatar {
+                width: 90px;
+                height: 126px;
+            }
         }
     </style>
 </head>
@@ -482,7 +485,7 @@
     <header class="card header anim d1">
         <div class="header-top">
             <div class="header-left">
-                <!-- 📸 一寸证件照：请将照片命名为 id-photo.jpg 放在仓库根目录 -->
+                <!-- 📸 一寸证件照（已放大） -->
                 <img class="avatar" src="id-photo.jpg" alt="证件照">
                 <div class="name-block">
                     <h1>岳怀旭</h1>
