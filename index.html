@@ -133,14 +133,15 @@
             gap: 1.4rem;
         }
 
+        /* ===== 头像照片替换图标 ===== */
         .avatar {
-            width: 68px; height: 68px;
+            width: 68px;
+            height: 68px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent) 0%, #f97316 100%);
-            display: flex; align-items: center; justify-content: center;
-            color: white;
             flex-shrink: 0;
+            object-fit: cover;          /* 保持照片比例，裁剪填充 */
             box-shadow: 0 4px 18px var(--accent-glow);
+            background: linear-gradient(135deg, var(--accent) 0%, #f97316 100%); /* 加载前的背景 */
         }
 
         .name-block h1 {
@@ -166,6 +167,17 @@
             flex-direction: column;
             align-items: flex-end;
             gap: 0.7rem;
+        }
+
+        /* ===== 2寸证件照样式 ===== */
+        .id-photo {
+            width: 120px;                /* 2寸照片的显示宽度，可根据需要调整 */
+            height: auto;
+            border-radius: 6px;
+            border: 2px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            object-fit: cover;          /* 保持原始比例 */
+            background: #f5f5f5;        /* 加载前占位底色 */
         }
 
         .theme-btn {
@@ -469,6 +481,7 @@
             .skill-row    { flex-direction: column; gap: 0.3rem; }
             .edu-row      { flex-direction: column; }
             .rm-label     { font-size: 0.85rem; }
+            .id-photo     { width: 90px; }   /* 小屏幕适当缩小证件照 */
         }
     </style>
 </head>
@@ -480,10 +493,8 @@
     <header class="card header anim d1">
         <div class="header-top">
             <div class="header-left">
-                <!-- 📷 替换图标为照片: 删除下面整个 <div class="avatar">，换成 <img class="avatar" src="你的照片.jpg" style="object-fit:cover;"> -->
-                <div class="avatar">
-                    <i data-lucide="user" style="width:34px;height:34px;"></i>
-                </div>
+                <!-- 📷 头像照片：请将你的头像图片命名为 avatar.jpg 并放在仓库根目录 -->
+                <img class="avatar" src="avatar.jpg" alt="头像">
                 <div class="name-block">
                     <h1>岳怀旭</h1>
                     <div class="role-line">
@@ -494,6 +505,8 @@
             </div>
 
             <div class="header-right">
+                <!-- 📸 2寸证件照：请将证件照命名为 id-photo.jpg 并放在仓库根目录 -->
+                <img class="id-photo" src="id-photo.jpg" alt="证件照">
                 <button class="theme-btn" id="themeToggle">
                     <i data-lucide="moon" style="width:13px;height:13px;"></i>
                     <span>暗色</span>
