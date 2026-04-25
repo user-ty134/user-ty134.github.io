@@ -1,7 +1,7 @@
-# user-ty134.github.io
 # 🌟 岳怀旭 · 电子简历（持续迭代中）
+# user-ty134.github.io
 
-> 一个会“变暗变亮”的个人简历网站，记录我的前端成长之路。
+> 一个会“变暗变亮”的个人简历网站，记录我的成长之路。
 
 🔗 **在线访问**：[https://user-ty134.github.io](https://user-ty134.github.io)
 
