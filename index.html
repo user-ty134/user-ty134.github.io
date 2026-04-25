@@ -135,7 +135,7 @@
 
         /* ===== 一寸证件照（已放大） ===== */
         .avatar {
-            width: 110px;             /* 一寸照片放大宽度，5:7 比例 */
+            width: 110px;
             height: 154px;
             border-radius: 6px;
             object-fit: cover;
@@ -439,6 +439,7 @@
             cursor: pointer; margin-bottom: 1rem;
             box-shadow: 0 4px 14px var(--accent-glow);
             transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none; /* 清除 <a> 下划线 */
         }
         .print-btn:hover {
             transform: translateY(-2px);
@@ -725,10 +726,12 @@
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer anim d7">
-        <button class="print-btn" onclick="window.print()">
-            <i data-lucide="printer" style="width:15px;height:15px;"></i>
-            导出 PDF（Ctrl+P）
-        </button>
+        <!-- 🔽 修改为下载 PDF 链接 -->
+        <a class="print-btn" href="resume.pdf" download="岳怀旭_简历.pdf">
+            <i data-lucide="download" style="width:15px;height:15px;"></i>
+            下载 PDF
+        </a>
+        <!-- 🔼 以上为修改部分 -->
         <p>
             © 2024 岳怀旭 &nbsp;·&nbsp; 常州大学软件工程 &nbsp;·&nbsp;
             <em>v0.3</em> &nbsp;·&nbsp; 原生 HTML/CSS/JS 构建 · GitHub Pages 部署
